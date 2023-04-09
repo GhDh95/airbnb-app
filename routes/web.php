@@ -20,7 +20,8 @@ use Inertia\Inertia;
 Route::get('/',[ListingController::class, 'index']);
 Route::get('listing/create',[ListingController::class, 'create'])->middleware('auth');
 Route::get('/listing/{listing:id}', [ListingController::class, 'show']);
-Route::post('test',[ListingController::class, 'store']);
+Route::post('/listing/store',[ListingController::class, 'store'])->middleware('auth');
+
 
 
 Route::get('/dashboard', function () {

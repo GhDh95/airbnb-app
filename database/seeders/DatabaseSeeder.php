@@ -34,7 +34,6 @@ class DatabaseSeeder extends Seeder
 
 
 
-        Image::factory(100)->create();
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

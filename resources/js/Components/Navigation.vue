@@ -10,7 +10,6 @@
         </div>
 
     </nav>
-
 </template>
 
 <script setup>
@@ -20,6 +19,7 @@
 import SearchComponent from "@/Components/Navigation/SearchComponent.vue";
 import DropDown from "@/Components/Navigation/DropDown.vue";
 import {ref} from "vue";
+import FilterBar from "@/Components/Filter/FilterBar.vue";
 
 
 

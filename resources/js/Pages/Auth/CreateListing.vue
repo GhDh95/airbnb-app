@@ -4,7 +4,7 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
-import { useForm, usePage} from '@inertiajs/vue3';
+import {useForm, usePage} from '@inertiajs/vue3';
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import {computed} from "vue";
 
@@ -13,6 +13,11 @@ const form = useForm({
     description: null,
     category_id: null,
     images: null,
+    street_name: null,
+    houseN: null,
+    zip:null,
+    city:null,
+    country:null,
     price: 1
 });
 
@@ -73,6 +78,91 @@ const categories = computed(() => usePage().props.categories);
                     <InputError class="mt-2" :message="form.errors.category_id"/>
                 </div>
 
+                <!--       address inputs         -->
+                <div>
+                    <InputLabel for="street" value="street name"/>
+
+                    <TextInput
+                        id="street"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.street_name"
+                        required
+                        autofocus
+                        autocomplete="street_name"
+                        placeholder="your street"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.street_name"/>
+                </div>
+                <div>
+                    <InputLabel for="house" value="house number"/>
+
+                    <TextInput
+                        id="house"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.houseN"
+                        required
+                        autofocus
+                        autocomplete="houseN"
+                        placeholder="House number"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.houseN"/>
+                </div>
+
+                <div>
+                    <InputLabel for="zip" value="zip"/>
+
+                    <TextInput
+                        id="zip"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.zip"
+                        required
+                        autofocus
+                        autocomplete="zip"
+                        placeholder="zip"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.zip"/>
+                </div>
+                <div>
+                    <InputLabel for="city" value="city"/>
+
+                    <TextInput
+                        id="city"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.city"
+                        required
+                        autofocus
+                        autocomplete="city"
+                        placeholder="city"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.city"/>
+                </div>
+                <div>
+                    <InputLabel for="country" value="country"/>
+
+                    <TextInput
+                        id="country"
+                        type="text"
+                        class="mt-1 block w-full"
+                        v-model="form.country"
+                        required
+                        autofocus
+                        autocomplete="country"
+                        placeholder="country"
+                    />
+
+                    <InputError class="mt-2" :message="form.errors.country"/>
+                </div>
+
+                <!--                    -->
+
                 <div>
                     <p class="text-gray-600 text-sm">{{ form.price }}$ Per night</p>
                     <input v-model="form.price"
@@ -82,7 +172,8 @@ const categories = computed(() => usePage().props.categories);
                 </div>
                 <div>
                     <InputLabel for="images" value="Upload images"></InputLabel>
-                    <input class="mt-1" type="file" @input="form.images = $event.target.files" name="images" id="image" multiple>
+                    <input class="mt-1" type="file" @input="form.images = $event.target.files" name="images" id="image"
+                           multiple>
                     <InputError class="mt-2" :message="form.errors.images"/>
 
                 </div>

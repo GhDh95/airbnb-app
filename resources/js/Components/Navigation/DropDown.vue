@@ -55,7 +55,7 @@ let show = ref(false);
             <p class="text-red-500 text-center" v-if="!$page.props.can.register">Welcome Back, {{ $page.props.auth.user.name }}</p>
             <Link v-if="$page.props.can.register" href="/register" class="px-2 py-1 cursor-pointer hover:bg-gray-200">Sign up</Link>
             <Link v-if="$page.props.can.register" href="/login" class="px-2 py-1 cursor-pointer hover:bg-gray-200">Login</Link>
-            <Link :as="button" v-if="!$page.props.can.register" href="/logout" method="post"  class="px-2 py-1 cursor-pointer hover:bg-gray-200">Logout</Link>
+            <Link :as="'button'" v-if="!$page.props.can.register" href="/logout" method="post"  class="px-2 py-1 cursor-pointer hover:bg-gray-200">Logout</Link>
         </div>
     </div>
 

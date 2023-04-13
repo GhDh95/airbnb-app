@@ -32,7 +32,7 @@ class Listing extends Model
 
     public function address(): HasOne
     {
-        return $this->hasOne(Address::class);
+        return $this->hasOne(Address::class, 'listing_id');
     }
 
     public function scopeFilter($query, array $filters)

@@ -22,7 +22,7 @@ class ListingController extends Controller
     public function index(): Response
     {
         $filters = request()->input();
-        $addresses = Address::all();
+        /*$addresses = Address::all();
 
         $transformed = [];
         foreach ($addresses as $address){
@@ -34,22 +34,45 @@ class ListingController extends Controller
         $result = [];
         foreach ($transformed as $val){
             $result [] = $geocoder->geocode($val)['results'][0]['geometry'];
+        }*/
+
+
+
+
+
+        $geocoder = new Geocoder('a02143abc3884803b13de230ec9685c3');
+        $listings = Listing::query()
+            ->latest()
+            ->filter($filters)
+            ->with('category','images','address')
+            ->paginate(16)
+            ->withQueryString()
+           ;
+
+
+        /* $address = $listing->address->streetname  . " " . $listing->address->house_number . " " . $listing->address->zip . " " . $listing->address->city . " " . $listing->address->country;
+            $coordinates = $geocoder->geocode($address)['results'][0]['geometry'];
+            $listing->coordinates = $coordinates;*/
+
+        $coordinates = [];
+        foreach ($listings as $listing){
+            $address = $listing->address->streetname  . " " . $listing->address->house_number . " " . $listing->address->zip . " " . $listing->address->city . " " . $listing->address->country;
+            $coordinates[] = ['listing_title' => $listing->title, 'listing_id'=> $listing->id , 'coordinates' => $geocoder->geocode($address)['results'][0]['geometry']?? null, 'price'=>$listing->price];
         }
 
 
 
 
-
         return Inertia::render('Welcome',[
-            'listings' => Listing::query()->latest()->filter($filters)->with('category','images')->paginate(16)->withQueryString(),
-            'address' => $result
+            'listings' => $listings,
+            'coordinates'=>$coordinates
         ]);
     }
 
     public function show(Listing $listing): Response
     {
         return Inertia::render('ShowListing', [
-            'listing' => $listing->load('images')
+            'listing' => $listing->load('images','owner')
         ]);
     }
 
@@ -75,13 +98,7 @@ class ListingController extends Controller
             'country'=>['required']
         ]);
 
-        $address = Address::create([
-            'streetname'=>$attributes['street_name'],
-            'house_number'=>$attributes['houseN'],
-            'zip'=>$attributes['zip'],
-            'city'=>$attributes['city'],
-            'country'=>$attributes['country']
-        ]);
+
 
 
         $listing = Listing::create([
@@ -89,12 +106,24 @@ class ListingController extends Controller
            'description'=> $attributes['description'],
            'price'=> $attributes['price'],
            'category_id'=> $attributes['category_id'],
-           'user_id' => auth()->id(),
-            'address_id'=> $address->id
+           'user_id' => auth()->id()
         ]);
 
+
+        Address::create([
+            'listing_id'=>$listing->id,
+            'streetname'=>$attributes['street_name'],
+            'house_number'=>$attributes['houseN'],
+            'zip'=>$attributes['zip'],
+            'city'=>$attributes['city'],
+            'country'=>$attributes['country'],
+        ]);
+
+
+
+
         foreach ($request->file('images') as $image){
-            $image_path = $image->store('Listing_images', 'public');
+            $image_path = $image->store('Listing_images','public');
 
             Image::create([
                 'listing_id'=> $listing->id,

@@ -2,12 +2,14 @@
 
 
     <div  class=" relative px-2 md:px-0 w-fit flex flex-col justify-center max-w-md md:max-w-sm">
-        <img class="rounded-lg" src="/images/6ba850bd-6582-45a5-bce7-5b96dc6f30dd.webp" alt="">
+<div class="">
+    <img class="rounded-lg w-72 h-72" :src="'/storage/' + images[index].image_path" alt="">
 
+</div>
         <div @click="right_image()" class="opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute right-2 md:right-1 top-1/3 ">
             <i class="fa-solid fa-chevron-right scale-75"></i>
         </div>
-        <div class="opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
+        <div @click="left_image()"  class="opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
             <i class="fa-solid fa-chevron-left scale-75"></i>
         </div>
 
@@ -38,15 +40,21 @@ let index = ref(0);
 let path = ref(props.images[index])?? '';
 
 function right_image(){
-    if(index < props.images.length){
-        index++;
+    if(index.value < props.images.length -1){
+        index.value++;
+    }else{
+        index.value = 0;
     }
+    console.log(index.value);
 }
 
 function left_image(){
-    if(index > 0){
-        index-- ;
+    if(index.value > 0){
+        index.value--;
+    }else{
+        index.value = props.images.length - 1;
     }
+    console.log(index.value);
 }
 
 

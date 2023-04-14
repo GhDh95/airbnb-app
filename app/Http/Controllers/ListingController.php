@@ -90,7 +90,7 @@ class ListingController extends Controller
             'price'=>['required','min:1','max:5000'],
             'category_id'=>['required','exists:categories,id'],
             'images.*'=>['required','image'],
-            'images'=>['required','array'],
+            'images'=>['required','array','min:1','max:5'],
             'street_name'=>['required', 'min:1','max:20'],
             'houseN'=>['required', 'integer'],
             'zip'=>['required','integer'],

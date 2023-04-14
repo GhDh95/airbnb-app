@@ -3,15 +3,16 @@
 
     <div  class=" relative px-2 md:px-0 w-fit flex flex-col justify-center max-w-md md:max-w-sm">
 <div class="">
-    <img class="rounded-lg w-72 h-72" :src="'/storage/' + images[index].image_path" alt="">
+    <img @mouseenter="show_arrows = true" @mouseleave="show_arrows = false" class="rounded-lg w-72 h-72" :src="'/storage/' + images[index].image_path" alt="">
 
 </div>
-        <div @click="right_image()" class="opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute right-2 md:right-1 top-1/3 ">
+        <div v-show="show_arrows" @click="right_image()" class="cursor-pointer hover:cursor-pointer opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute right-2 md:right-1 top-1/3 ">
             <i class="fa-solid fa-chevron-right scale-75"></i>
         </div>
-        <div @click="left_image()"  class="opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
+        <div v-show="show_arrows" @click="left_image()"  class="cursor-pointer hover:cursor-pointer opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
             <i class="fa-solid fa-chevron-left scale-75"></i>
         </div>
+        <p class="absolute bottom-12 text-green-600 text-xs rounded-full px-2 bg-yellow-300">{{index + 1}} of {{images.length}}</p>
 
 
         <Link :href="`/listing/${id}`" class="px-3">
@@ -34,6 +35,7 @@ const props = defineProps({
     id: Number
 });
 
+const show_arrows = ref(false);
 
 let index = ref(0);
 
@@ -63,3 +65,14 @@ function left_image(){
 </script>
 
 
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+    transition: opacity 0.5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+</style>

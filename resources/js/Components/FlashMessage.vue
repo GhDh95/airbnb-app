@@ -13,7 +13,7 @@ import {computed, onMounted, ref} from "vue";
 import {usePage} from "@inertiajs/vue3";
 
 
-const message = computed(()=> usePage().props.flash.message);
+let message = computed(()=> usePage().props.flash.message);
 
 
 

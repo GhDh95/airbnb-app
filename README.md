@@ -2,12 +2,14 @@
 
 ## About This Project
 
-This is an Airbnb clone created with Laravel, Vue js and Inertia Js.
-- Create a Listing.
-- Make a Reservation.
+This is an Airbnb clone ish created with Laravel, Vue js and Inertia Js.
+- user can register and login.
+- user can make a listing, view and delete it.
+- user can make a reservation. 
 
 
 ![FireShot Capture 086 - - Laravel - localhost](https://user-images.githubusercontent.com/88755979/232253833-90f22573-39c2-4cc2-bb1e-be99710ed6d0.png)
 ![FireShot Capture 085 - - Laravel - localhost](https://user-images.githubusercontent.com/88755979/232253834-f0d7ea54-9bd6-48a5-9f33-5f218380b2fe.png)
 ![FireShot Capture 088 - - Laravel - localhost](https://user-images.githubusercontent.com/88755979/232253835-ea5706fd-0229-4716-b9a3-ab19f3e6b144.png)
 ![FireShot Capture 084 - - Laravel - localhost](https://user-images.githubusercontent.com/88755979/232253837-8a43cfeb-de68-46a4-8fa5-7e427dc2a0d6.png)
+![FireShot Capture 087 - - Laravel - localhost](https://user-images.githubusercontent.com/88755979/232253891-36dc1b85-d83f-4c95-9e34-3ba062a3232b.png)

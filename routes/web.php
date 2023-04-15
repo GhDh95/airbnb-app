@@ -29,7 +29,8 @@ Route::post('/listing/destroy/{listing:id}',[ListingController::class,'destroy']
 Route::get('/user/listings',[ProfileListingController::class, 'index'])->middleware('auth');
 
 Route::post('/listing/reservation/{listing:id}',[ReservationController::class, 'store'])->middleware('auth');
-
+Route::get('/user/reservations',[ReservationController::class, 'index'])->middleware('auth');
+Route::post('/reservation/destroy/{reservation:id}',[ReservationController::class,'destroy'])->middleware('auth');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -22,25 +22,10 @@ class ListingController extends Controller
     public function index(): Response
     {
         $filters = request()->input();
-        /*$addresses = Address::all();
-
-        $transformed = [];
-        foreach ($addresses as $address){
-            $string = $address->streetname . " " . $address->house_number . " " . $address->zip . " " . $address->city . " " . $address->country;
-                $transformed[] = $string;
-        }
-        $geocoder = new Geocoder('a02143abc3884803b13de230ec9685c3');
-
-        $result = [];
-        foreach ($transformed as $val){
-            $result [] = $geocoder->geocode($val)['results'][0]['geometry'];
-        }*/
 
 
 
-
-
-        $geocoder = new Geocoder('a02143abc3884803b13de230ec9685c3');
+        $geocoder = new Geocoder(env('GEOCODER_API_KEY'));
         $listings = Listing::query()
             ->latest()
             ->filter($filters)
@@ -135,6 +120,11 @@ class ListingController extends Controller
 
 
         return redirect()->back()->with('message', 'Listing has been created');
+    }
+
+    public function destroy(Listing $listing): RedirectResponse{
+        $listing->delete();
+        return redirect()->back()->with('message', 'Listing has been deleted');
     }
 
 }

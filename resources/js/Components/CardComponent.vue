@@ -3,13 +3,13 @@
 
     <div  class=" relative px-2 md:px-0 w-fit flex flex-col justify-center max-w-md md:max-w-sm">
 <div class="">
-    <img @mouseenter="show_arrows = true" @mouseleave="show_arrows = false" class="rounded-lg w-72 h-72" :src="'/storage/' + images[index].image_path" alt="">
+    <img @mouseenter="show_arrows = true" @mouseleave="delay" class="rounded-lg w-72 h-72" :src="'/storage/' + images[index].image_path" alt="">
 
 </div>
-        <div v-show="show_arrows" @click="right_image()" class="cursor-pointer hover:cursor-pointer opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute right-2 md:right-1 top-1/3 ">
+        <div v-show="show_arrows" @click="right_image()" class="cursor-pointer hover:cursor-pointer opacity-75 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute right-2 md:right-1 top-1/3 ">
             <i class="fa-solid fa-chevron-right scale-75"></i>
         </div>
-        <div v-show="show_arrows" @click="left_image()"  class="cursor-pointer hover:cursor-pointer opacity-50 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
+        <div v-show="show_arrows" @click="left_image()"  class="cursor-pointer hover:cursor-pointer opacity-75 w-7 h-7 bg-white flex justify-center items-center rounded-full absolute left-2 md:left-1 top-1/3 ">
             <i class="fa-solid fa-chevron-left scale-75"></i>
         </div>
         <p class="absolute bottom-12 text-green-600 text-xs rounded-full px-2 bg-yellow-300">{{index + 1}} of {{images.length}}</p>
@@ -35,7 +35,7 @@ const props = defineProps({
     id: Number
 });
 
-const show_arrows = ref(false);
+let show_arrows = ref(false);
 
 let index = ref(0);
 
@@ -47,7 +47,7 @@ function right_image(){
     }else{
         index.value = 0;
     }
-    console.log(index.value);
+    show_arrows.value = true;
 }
 
 function left_image(){
@@ -56,8 +56,14 @@ function left_image(){
     }else{
         index.value = props.images.length - 1;
     }
-    console.log(index.value);
+    show_arrows.value = true;
 }
+
+ function delay(){
+    setTimeout(()=> {
+       show_arrows.value = false
+    }, 3000);
+ }
 
 
 
@@ -65,14 +71,4 @@ function left_image(){
 </script>
 
 
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.5s ease;
-}
 
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>

@@ -9,13 +9,10 @@
 <script setup>
 
 
-import {computed, onMounted, ref} from "vue";
+import {computed, nextTick, onMounted, ref, watch} from "vue";
 import {usePage} from "@inertiajs/vue3";
 
-
 let message = computed(()=> usePage().props.flash.message);
-
-
 
 
 </script>

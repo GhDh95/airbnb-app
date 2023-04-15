@@ -8,11 +8,14 @@ import {ref} from "vue";
 
 let show = ref(false);
 
+const close_modal = ()=>{
+    setTimeout(()=>{show.value = false},3000)
+};
 
 </script>
 
 <template>
-    <div @click="show = !show" v-on:mouseenter="show = true" v-on:mouseleave="show = false"  class="relative flex border border-gray-400 rounded-full py-2 px-3 space-x-5 cursor-pointer hover:shadow-lg transition ease-in">
+    <div @click="show = !show" v-on:mouseenter="show = true" v-on:mouseleave="close_modal"  class="relative flex border border-gray-400 rounded-full py-2 px-3 space-x-5 cursor-pointer hover:shadow-lg transition ease-in">
         <div>
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g id="Menu / Hamburger_LG">
@@ -53,9 +56,10 @@ let show = ref(false);
 
         <div v-show="show" class="absolute right-0 top-12 w-48 bg-white z-50 border flex flex-col rounded divide-y border-gray-100 rounded-xl shadow-md">
             <p class="text-red-500 text-center" v-if="!$page.props.can.register">Welcome Back, {{ $page.props.auth.user.name }}</p>
-            <Link v-if="$page.props.can.register" href="/register" class="px-2 py-1 cursor-pointer hover:bg-gray-200">Sign up</Link>
-            <Link v-if="$page.props.can.register" href="/login" class="px-2 py-1 cursor-pointer hover:bg-gray-200">Login</Link>
-            <Link :as="'button'" v-if="!$page.props.can.register" href="/logout" method="post"  class="px-2 py-1 cursor-pointer hover:bg-gray-200">Logout</Link>
+            <Link v-if="$page.props.can.register" href="/register" class="px-2 py-1 cursor-pointer hover:bg-gray-200 ">Sign up</Link>
+            <Link v-if="$page.props.can.register" href="/login" class="px-2 py-1 cursor-pointer hover:bg-gray-200 ">Login</Link>
+            <Link v-if="!$page.props.can.register" href="/listing/create" class=" cursor-pointer hover:bg-gray-200  text-center">airbnb your home</Link>
+            <Link :as="'button'" v-if="!$page.props.can.register" href="/logout" method="post"  class="cursor-pointer hover:bg-gray-200  w-full">Logout</Link>
         </div>
     </div>
 

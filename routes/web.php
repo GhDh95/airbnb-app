@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProfileListingController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -21,12 +22,11 @@ Route::get('/',[ListingController::class, 'index']);
 Route::get('listing/create',[ListingController::class, 'create'])->middleware('auth');
 Route::get('/listing/{listing:id}', [ListingController::class, 'show']);
 Route::post('/listing/store',[ListingController::class, 'store'])->middleware('auth');
+Route::post('/listing/destroy/{listing:id}',[ListingController::class,'destroy'])->middleware('auth');
+
+Route::get('/user/listings',[ProfileListingController::class, 'index'])->middleware('auth');
 
 
-
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

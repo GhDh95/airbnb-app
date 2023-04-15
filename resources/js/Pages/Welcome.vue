@@ -34,7 +34,7 @@ let show_map = ref(false);
         <Popup :class="!show_map? 'invisible' : 'visible'">
             <BingMap :coordinates="coordinates" class="w-full"></BingMap>
         </Popup>
-        <button v-html="!show_map? 'show map' : 'hide map'" @click="show_map = !show_map" class="fixed hide md:block bottom-1 right-1   bg-black text-white rounded-full px-3 py-1 hover:opacity-75"></button>
+        <button v-html="!show_map? 'show map' : 'hide map'" @click="show_map = !show_map" class="fixed hidden md:block bottom-1 right-1   bg-black text-white rounded-full px-3 py-1 hover:opacity-75"></button>
 
     </div>
 </div>

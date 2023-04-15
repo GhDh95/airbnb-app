@@ -3,6 +3,8 @@
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProfileListingController;
+use App\Http\Controllers\ReservationController;
+use App\Models\Reservation;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -26,6 +28,7 @@ Route::post('/listing/destroy/{listing:id}',[ListingController::class,'destroy']
 
 Route::get('/user/listings',[ProfileListingController::class, 'index'])->middleware('auth');
 
+Route::post('/listing/reservation/{listing:id}',[ReservationController::class, 'store'])->middleware('auth');
 
 
 Route::middleware('auth')->group(function () {

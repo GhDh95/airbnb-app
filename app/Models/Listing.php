@@ -35,9 +35,18 @@ class Listing extends Model
         return $this->hasOne(Address::class, 'listing_id');
     }
 
+    public function reservation(): HasMany
+    {
+        return $this->hasMany(Reservation::class);
+    }
+
     public function scopeFilter($query, array $filters)
     {
         $query
             ->when($filters['category'] ?? false, fn($query, $category) => $query->whereHas('category', fn($q) => $q->where('name', 'like', $category)));
     }
+
+
+
+
 }

@@ -3,7 +3,6 @@ import '../css/app.css';
 
 import { createApp, h } from 'vue';
 import {createInertiaApp, Head, Link} from '@inertiajs/vue3';
-import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import MainLayout from "@/Layouts/MainLayout.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
@@ -23,7 +22,6 @@ createInertiaApp({
             .component('Link', Link)
             .component('Head', Head)
             .component('VueDatePicker', VueDatePicker)
-            .use(ZiggyVue, Ziggy)
             .mount(el);
     },
     progress: {

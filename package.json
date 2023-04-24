@@ -18,6 +18,7 @@
     },
     "dependencies": {
         "@vuepic/vue-datepicker": "^4.4.0",
-        "leaflet": "^1.9.3"
+        "leaflet": "^1.9.3",
+        "ziggy-js": "^1.5.1"
     }
 }

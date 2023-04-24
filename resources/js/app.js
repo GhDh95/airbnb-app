@@ -6,6 +6,7 @@ import {createInertiaApp, Head, Link} from '@inertiajs/vue3';
 import MainLayout from "@/Layouts/MainLayout.vue";
 import VueDatePicker from '@vuepic/vue-datepicker';
 import '@vuepic/vue-datepicker/dist/main.css'
+import {ZiggyVue} from "ziggy-js/dist/vue.m";
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -22,6 +23,7 @@ createInertiaApp({
             .component('Link', Link)
             .component('Head', Head)
             .component('VueDatePicker', VueDatePicker)
+            .use(ZiggyVue, Ziggy)
             .mount(el);
     },
     progress: {
